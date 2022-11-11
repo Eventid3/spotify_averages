@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h1>TOP HITS</h1>
+
+<p class="section-info">Spotify has a number of "Top Hits" playlists from each year, going back to 1970. Choose a year below to view the analytical data for each hit song from that perticular year.</p>
+
+<form action="/tophits" method="post">
+    <select name="year">
+        <option value="" selected disabled hidden>Year</option>
+        {% for year in years %}
+            <option name="{{ year }}" value="{{ year }}">{{ year }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Lookup">
+</form>
+<h2>{{ yearSelected }}</h2>
+<table class="data">
+    {% if playlist %}
+    <thead>
+        <tr>
+            <th class="i">#</th>
+            <th>Track</th>
+            <th>Artist(s)</th>
+            <th>Loudness</th>
+            <th>Danceability</th>
+            <th>Valence</th>
+            <th>Speechiness</th>
+            <th>Acousticness</th>
+            <th>Key</th>
+            <th>Duration</th>
+        </tr>
+    </thead>
+    {% endif %}
+    <tbody>
+        {% for entry in playlist %}
+        <tr>
+            <td>{{ entry['id'] }}</td>
+            <td>{{ entry['track'] }}</td>
+            <td>{{ entry['artists']}}</td>
+            <td>{{ entry['loudness'] }}</td>
+            <td>{{ entry['danceability'] | percent }}</td>
+            <td>{{ entry['valence'] | percent }}</td>
+            <td>{{ entry['speechiness'] | percent }}</td>
+            <td>{{ entry['acousticness'] | percent }}</td>
+            <td>{{ entry['key'] }}</td>
+            <td>{{ entry['duration'] | time }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,341 @@
+
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  * {
+    margin: 0;
+  }
+
+  html, body, main {
+    height: 100%;
+    font-family: "Helvetica Neue", "Helvetica", sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+  }
+
+  header{
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    background-color: rgb(30, 215, 96);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px
+  }
+
+  .brand a{
+    padding: 6px 8px 8px 8px;
+    font-size: 22px;
+    color: black;
+    text-decoration: none;
+    background-image: linear-gradient(rgb(50, 235, 116), rgb(50, 235, 116));
+    background-size: 0 100%;
+    background-repeat: no-repeat;
+    transition: .4s;
+  }
+
+  .brand a:hover{
+    background-size: 100% 100%;
+  }
+
+  .logo{
+    display: flex;
+    align-items: center;
+  }
+
+  .logo span{
+    margin-right: 10px;
+  }
+
+  main{
+    width: 100%;
+    display: flex;
+  }
+
+  nav{
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    display: block;
+    top: 60px;
+    background-color: #222;
+    padding: 10px;
+    padding-top: 20px;
+    z-index: 9;
+    transition: 0.4s;
+  }
+
+  nav a{
+    padding: 6px 8px 8px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: whitesmoke;
+    display: block;
+    background-image: linear-gradient(#444,#444);
+    background-size: 0 100%;
+    background-repeat: no-repeat;
+    transition: .4s;
+  }
+
+  nav a:hover{
+    background-size: 100% 100%;
+  }
+
+  .mobnav{
+    position:absolute;
+    background: url("/static/images/logos/menu_icon.png");
+    background-size: contain;
+    display: none;
+    width: 60px;
+    height:60px;
+    top: 70px;
+    right: 15px;
+    border: none;
+    z-index:10;
+  }
+
+  body {
+    line-height: 1.5;
+    /* -webkit-font-smoothing: antialiased; */
+  }
+
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  input, button, textarea, select {
+    font: inherit;
+  }
+
+  input[type=button], input[type=submit]{
+    background-color: rgb(50, 235, 116);
+    border: none;
+    padding: 7px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 4px;
+  }
+
+  input[type=button]:hover, input[type=submit]:hover{
+    filter: brightness(110%);
+    cursor: pointer;
+  }
+
+  input[type=select]{
+    width: 60px;
+    height: 20px
+  }
+
+  input[type=text] {
+    background-color: white;
+    background-image: url('/static/images/logos/searchicon.png');
+    background-position: 4px 7px;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    padding-left: 30px;
+    height: 40px;
+    width: 50%;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  select{
+    width: 120px;
+    padding: 8px 5px 8px 5px;
+    margin-right: 12px;
+    border: none;
+    background-color: rgb(50, 235, 116);
+    border-radius: 4px;
+
+  }
+
+  .search{
+    margin-bottom: 20px;
+  }
+
+  table{
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  tr{
+    border: 1px #999
+  }
+
+  th, td {
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    word-wrap: break-word
+  }
+
+  .table-img{
+    width: 42px;
+  }
+
+  .table-link{
+    width: 120px;
+    text-align: right;
+  }
+
+  .table-lookup{
+    text-align: right;
+    width: 95px
+  }
+
+  .i{
+    width: 30px
+  }
+
+  .title{
+    width: 26%
+  }
+
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+
+  h2, h3{
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  .main-container{
+    position:fixed;
+    top: 60px;
+    left: 200px;
+    width: calc(100% - 200px);
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding:20px;
+    padding-bottom: 100px;
+  }
+
+  .maxwidth{
+    max-width: 1200px;
+  }
+
+  .info{
+    max-width: 800px;
+  }
+
+  .section-info{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    max-width: 600px;
+  }
+
+  .lookup-header{
+    width: 100%;
+    display: inline-flex;
+    flex-direction: row-reverse;
+    padding-bottom: 20px;
+    justify-content: flex-end;
+  }
+
+  .lookup-text{
+    align-self: flex-end;
+  }
+
+  .lookup-img{
+    padding-right: 30px;
+  }
+
+  @media 
+  only screen and (max-width: 1120px) {
+    .data th{
+      font-size: 10px;
+    }
+  }
+
+  @media 
+  only screen and (max-width: 760px) {
+  
+    .brand span{
+      display: block;
+    }
+
+    nav{
+      left: -200px;
+    }
+
+    .main-container{
+      left: 0px;
+      width: 100%
+    }
+
+    .brand a{
+      font-size: 18px;
+    }
+
+    .mobnav{
+      display: block;
+    }
+
+    .mobnav:hover{
+      cursor: pointer;
+      filter:invert(25%);
+    }
+
+    .table-link{
+      width: 100px;
+    }
+  
+    .table-lookup{
+      width: 65px
+    }
+
+    input[type=button], input[type=submit]{
+      padding: 7px 10px;
+    }
+
+    /* Force table to not be like tables anymore */
+    .data table, .data thead, .data tbody, .data th, .data td, .data tr { 
+      display: block; 
+    }
+    
+    /* Hide table headers (but not display: none;, for accessibility) */
+    .data thead tr { 
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+    
+    .data tr { border: 1px #999 }
+    
+    .data td { 
+      /* Behave  like a "row" */
+      border: none;
+      border-bottom: 1px solid #eee; 
+      position: relative;
+      padding-left: 50%; 
+    }
+    
+    .data td:before { 
+      /* Now like a table header */
+      position: absolute;
+      /* Top/left values mimic padding */
+      top: 6px;
+      left: 6px;
+      width: 45%; 
+      padding-right: 10px; 
+      white-space: nowrap;
+    }
+    
+    /*
+    Label the data
+    */
+    .data td:nth-of-type(1):before { content: "#"; font-weight: bold;}
+    .data td:nth-of-type(2):before { content: "Track"; font-weight: bold;}
+    .data td:nth-of-type(3):before { content: "Loudness"; font-weight: bold;}
+    .data td:nth-of-type(4):before { content: "Danceability"; font-weight: bold;}
+    .data td:nth-of-type(5):before { content: "Valence"; font-weight: bold;}
+    .data td:nth-of-type(6):before { content: "Speechiness"; font-weight: bold;}
+    .data td:nth-of-type(7):before { content: "Acousticness"; font-weight: bold;}
+    .data td:nth-of-type(8):before { content: "Key"; font-weight: bold;}
+    .data td:nth-of-type(9):before { content: "Duration"; font-weight: bold;}
+  }

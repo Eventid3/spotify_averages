@@ -1,0 +1,132 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="lookup-header">
+    <div class="lookup-text">
+        <h1>{{ data['name'] }}</h1>
+        {% if data['type'] != "playlist" %}
+        <h2>{{ data['artists'] | artists }}</h2>
+        {% endif %}
+    </div>
+    <img class="lookup-img" src="{{ data['img'] }}" alt="" width="300px">
+</div>
+{% if data['type'] != "artist" %}
+<table class="data">
+    <thead>
+        <tr>
+            <th class="i">#</th>
+            {% if data['type'] != "track" %}
+            <th class="title">Track</th>
+            {% endif %}
+            {% if data['type'] == "playlist" %}
+            <th>Artist(s)</th>
+            {% endif %}
+            <th>Loudness</th>
+            <th>Danceability</th>
+            <th>Valence</th>
+            <th>Speechiness</th>
+            <th>Acousticness</th>
+            <th>Key</th>
+            <th>Duration</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entry in data['tracks'] %}
+        <tr>
+            <td>{{ entry }}</td>
+            {% if data['type'] != "track" %}
+            <td>{{ data['tracks'][entry]['track'] }}</td>
+            {% endif %}
+            {% if data['type'] == "playlist" %}
+            <td>{{ data['tracks'][entry]['artists'] | artists }}</td>
+            {% endif %}
+            <td>{{ data['tracks'][entry]['loudness'] }}</td>
+            <td>{{ data['tracks'][entry]['danceability'] | percent }}</td>
+            <td>{{ data['tracks'][entry]['valence'] | percent }}</td>
+            <td>{{ data['tracks'][entry]['speechiness'] | percent }}</td>
+            <td>{{ data['tracks'][entry]['acousticness'] | percent }}</td>
+            <td>{{ data['tracks'][entry]['key'] }}</td>
+            <td>{{ data['tracks'][entry]['duration'] | time }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+
+{% if data['albums'] %}
+<h3>ALBUMS</h3>
+<table>
+
+    <tbody>
+        {% for entry in data['albums'] %}
+        <tr>
+            <td class="table-img">
+                <img src="{{ data['albums'][entry]['img'] }}" alt="" width="42px">
+            </td>
+            <td>{{ entry }}</td>
+            <td>{{ data['albums'][entry]['release'] | releaseYear }}</td>
+            <td class="table-lookup">
+                <form action="/lookup" method="post">
+                    <input type="hidden" name="id" value="{{ data['albums'][entry]['id'] }}">
+                    <input type="hidden" name="category" value="albums">
+                    <input type="submit" value="Lookup">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% if data['singles'] %}
+<h3>SINGLES</h3>
+<table>
+
+    <tbody>
+        {% for entry in data['singles'] %}
+        <tr>
+            <td class="table-img">
+                <img src="{{ data['singles'][entry]['img'] }}" alt="" width="42px">
+            </td>
+            <td>{{ entry }}</td>
+            <td>{{ data['singles'][entry]['release'] | releaseYear }}</td>
+            <td class="table-lookup">
+                <form action="/lookup" method="post">
+                    <input type="hidden" name="id" value="{{ data['singles'][entry]['id'] }}">
+                    <input type="hidden" name="category" value="albums">
+                    <input type="submit" value="Lookup">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% if data['compilations'] %}
+<h3>COMPILATIONS</h3>
+<table>
+
+    <tbody>
+        {% for entry in data['compilations'] %}
+        <tr>
+            <td class="table-img">
+                <img src="{{ data['compilations'][entry]['img'] }}" alt="" width="42px">
+            </td>
+            <td>{{ entry }}</td>
+            <td>{{ data['compilations'][entry]['release'] | releaseYear }}</td>
+            <td class="table-lookup">
+                <form action="/lookup" method="post">
+                    <input type="hidden" name="id" value="{{ data['compilations'][entry]['id'] }}">
+                    <input type="hidden" name="category" value="albums">
+                    <input type="submit" value="Lookup">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endif %}
+
+
+{% endblock %}

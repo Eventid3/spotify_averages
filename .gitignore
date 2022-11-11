@@ -1,0 +1,7 @@
+venv/
+.vscode/
+__pycache__/
+
+testing.py
+.cache
+tokens.txt

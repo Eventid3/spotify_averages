@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h1>AVERAGES</h1>
+<p class="section-info">In this section, you can view the change in loudness, valence, or any of the other data over time, using the same playlists as in the "Top Hits" section.</p>
+
+<form action="/averages" method="post">
+    <select name="parameter">
+        <option value="" selected disabled hidden>Parameter</option>
+        <option value="loudness">Loudness</option>
+        <option value="danceability">Danceability</option>
+        <option value="valence">Valence</option>
+        <option value="speechiness">Speechiness</option>
+        <option value="acousticness">Acousticness</option>
+        <option value="duration">Duration</option>
+    </select>
+    <input type="submit" value="Lookup" onclick="newChart(avgList)">
+</form>
+<h2>{{ parameterH2 }}</h2>
+<div>
+    <canvas id="myChart"></canvas>
+</div>
+<script type="text/javascript">
+  newChart({{ avgList|safe }}, {{ parameter|safe }})
+</script>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h1>SEARCH</h1>
+<p class="section-info">Search for an artist, album, song or playlist on Spotify</p>
+
+<form action="/search" method="post">
+    <input class="search" name="query" autofocus type="text" placeholder="Album, track, artist or playlist">
+    <input type="submit" value="Lookup">
+</form>
+{% if error %}
+    <p class=error><strong>Error:</strong> {{ error }}
+{% endif %}
+
+{% for result in results %}
+<h3>{{ result | capitalize }}</h3>
+<table>
+{% for entry in results[result] %}
+    <tr>
+        <td class="table-img">
+            <img src="{{ results[result][entry]['img'] }}" alt="" width="42px">
+        </td>
+        <td>
+            <span>{{ entry }}</span>
+        </td>
+        {% if result == "albums" or result == "tracks"%}
+        <td>
+            <span>{{ results[result][entry]['artists'] | artists }} </span>
+        </td>
+        {% endif %}
+        <td class="table-lookup">
+            <form action="/lookup" method="post">
+                <input type="hidden" name="id" value="{{ results[result][entry]['id'] }}">
+                <input type="hidden" name="category" value="{{ result }}">
+                <input type="submit" value="Lookup">
+            </form>
+        </td>
+        <td class="table-link">
+            <form action="{{ results[result][entry]['url'] }}">
+                <input type="submit" value="Open in Spotify" />
+            </form>
+        </td>
+    </tr>
+
+{% endfor %}
+
+</table>
+
+{% endfor %}
+
+{% endblock %}
+

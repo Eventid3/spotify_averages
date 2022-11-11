@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/script.js"></script>
+    <link href="/static/style.css" rel="stylesheet">
+    <title>Spotify Averages</title>
+</head>
+<body>
+    <header>
+        <div class="brand">
+            <a href="/"><span>S P O T I F Y &nbsp&nbsp</span><span> A V E R A G E S</span></a>
+        </div>
+        <div class="logo">
+            <span>Powered by</span>
+            <img src="/static/images/logos/Spotify_Logo_RGB_Black.png" alt="" width="100px">
+        </div>
+    </header>
+    <main>
+    <button class="mobnav" onclick="toggleNav()"></button>
+    <nav class="mobhide" id="nav">     
+        <a href="/tophits">Top Hits</a>
+        <a href="/averages">Averages</a>
+        <a href="/search">Search</a>
+        <a href="/info">Info</a>
+    </nav>
+    <div class="main-container">
+        <div class="maxwidth">
+            {% block body %} {% endblock %}
+        </div>  
+    </div>
+    </main>
+</body>
+</html>
