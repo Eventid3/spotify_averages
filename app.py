@@ -41,7 +41,7 @@ def dict_factory(cursor, row):
     col_names = [col[0] for col in cursor.description]
     return {key: value for key, value in zip(col_names, row)}
 
-
+# connect to the sql database. check_same_thread needs to be "False" for chart.js to access the data
 db = sqlite3.connect("SpotifyTopHits.db", check_same_thread=False)
 c = db.cursor()
 
@@ -138,7 +138,7 @@ def lookup():
         elif category == "artists":
             data = getArtistAlbums(id)
 
-        return stream_template("lookup.html", data=data)
+        return stream_template("lookup.html", data=data, category=category)
     else:
         return redirect("/search")
 

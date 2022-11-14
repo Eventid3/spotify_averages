@@ -5,21 +5,31 @@
     <div class="lookup-text">
         <h1>{{ data['name'] }}</h1>
         {% if data['type'] != "playlist" %}
-        <h2>{{ data['artists'] | artists }}</h2>
+        <h2>
+        {% for artists in data['artists'] %}
+            {% for name, id in artists.items() %}
+                <form action="/lookup" method="post">
+                    <input type="hidden" name="id" value="{{ id }}">
+                    <input type="hidden" name="category" value="artists">
+                    <input class="formlink" type="submit" value="{{ name }}">
+                </form> 
+            {% endfor %}
+        {% endfor %}
+        </h2>
         {% endif %}
     </div>
     <img class="lookup-img" src="{{ data['img'] }}" alt="" width="300px">
 </div>
 {% if data['type'] != "artist" %}
-<table class="data">
+<table class="data data-{{ category }}">
     <thead>
         <tr>
             <th class="i">#</th>
             {% if data['type'] != "track" %}
-            <th class="title">Track</th>
+            <th class="th-track">Track</th>
             {% endif %}
             {% if data['type'] == "playlist" %}
-            <th>Artist(s)</th>
+            <th class="th-artist">Artist(s)</th>
             {% endif %}
             <th>Loudness</th>
             <th>Danceability</th>
@@ -38,15 +48,25 @@
             <td>{{ data['tracks'][entry]['track'] }}</td>
             {% endif %}
             {% if data['type'] == "playlist" %}
-            <td>{{ data['tracks'][entry]['artists'] | artists }}</td>
+            <td>
+            {% for artists in data['tracks'][entry]['artists'] %}
+                {% for name, id in artists.items() %}
+                <form action="/lookup" method="post">
+                    <input type="hidden" name="id" value="{{ id }}">
+                    <input type="hidden" name="category" value="artists">
+                    <input class="formlink" type="submit" value="{{ name }}">
+                </form>
+                {% endfor %}
+            {% endfor %}
+            </td>
             {% endif %}
-            <td>{{ data['tracks'][entry]['loudness'] }}</td>
-            <td>{{ data['tracks'][entry]['danceability'] | percent }}</td>
-            <td>{{ data['tracks'][entry]['valence'] | percent }}</td>
-            <td>{{ data['tracks'][entry]['speechiness'] | percent }}</td>
-            <td>{{ data['tracks'][entry]['acousticness'] | percent }}</td>
-            <td>{{ data['tracks'][entry]['key'] }}</td>
-            <td>{{ data['tracks'][entry]['duration'] | time }}</td>
+            <td>{{ data['tracks'][entry]['audio_features']['loudness'] }}</td>
+            <td>{{ data['tracks'][entry]['audio_features']['danceability'] | percent }}</td>
+            <td>{{ data['tracks'][entry]['audio_features']['valence'] | percent }}</td>
+            <td>{{ data['tracks'][entry]['audio_features']['speechiness'] | percent }}</td>
+            <td>{{ data['tracks'][entry]['audio_features']['acousticness'] | percent }}</td>
+            <td>{{ data['tracks'][entry]['audio_features']['key'] }}</td>
+            <td>{{ data['tracks'][entry]['audio_features']['duration'] | time }}</td>
         </tr>
         {% endfor %}
     </tbody>
@@ -127,6 +147,5 @@
 </table>
 {% endif %}
 {% endif %}
-
 
 {% endblock %}
