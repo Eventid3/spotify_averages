@@ -28,7 +28,7 @@ function newChart(avgList, parameter){
   datasets: [{
       label: para,
       backgroundColor: 'rgb(30, 215, 96)',
-      borderColor: 'rgb(30, 215, 96)',
+      borderColor: 'rgb(30, 215, 96)', 
       data: averages,
       }]
   };
@@ -39,9 +39,17 @@ function newChart(avgList, parameter){
   options: {
       scales: {
         y: {
+          grid:{
+            color: 'rgb(80,80,80)',
+          },
           title: {
             display: true,
             text: yAxis
+          }
+        },
+        x: {
+          grid:{
+            color: 'rgb(80,80,80)'
           }
         }
       }     

@@ -1,0 +1,34 @@
+<table>
+    {% for entry in results[result] %}
+        
+    
+
+<tr>
+    <td class="table-img">
+        <img src="{{ results[result][entry]['img'] }}" alt="" width="42px">
+    </td>
+    <td>
+        <span>{{ entry }}</span>
+    </td>
+    {% if result == "albums" or result == "tracks"%}
+    <td>
+        <span>{{ results[result][entry]['artists'] | artists }} </span>
+    </td>
+    {% endif %}
+    <td class="table-lookup">
+        <form action="/lookup" method="post">
+            <input type="hidden" name="id" value="{{ results[result][entry]['id'] }}">
+            <input type="hidden" name="category" value="{{ result }}">
+            <input type="submit" value="Lookup">
+        </form>
+    </td>
+    <td class="table-link">
+        <form target="_blank" action="{{ results[result][entry]['url'] }}">
+            <input type="submit" value="Open in Spotify" />
+        </form>
+    </td>
+</tr>
+
+{% endfor %}
+    
+</table>

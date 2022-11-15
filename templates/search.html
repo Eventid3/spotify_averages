@@ -15,38 +15,24 @@
 
 {% for result in results %}
 <h3>{{ result | capitalize }}</h3>
-<table>
+<div class="cardcontainer">
 {% for entry in results[result] %}
-    <tr>
-        <td class="table-img">
-            <img src="{{ results[result][entry]['img'] }}" alt="" width="42px">
-        </td>
-        <td>
-            <span>{{ entry }}</span>
-        </td>
-        {% if result == "albums" or result == "tracks"%}
-        <td>
-            <span>{{ results[result][entry]['artists'] | artists }} </span>
-        </td>
-        {% endif %}
-        <td class="table-lookup">
-            <form action="/lookup" method="post">
-                <input type="hidden" name="id" value="{{ results[result][entry]['id'] }}">
-                <input type="hidden" name="category" value="{{ result }}">
-                <input type="submit" value="Lookup">
-            </form>
-        </td>
-        <td class="table-link">
-            <form target="_blank" action="{{ results[result][entry]['url'] }}">
-                <input type="submit" value="Open in Spotify" />
-            </form>
-        </td>
-    </tr>
-
+    <div class="card">
+        <img class="card-img {% if result =="artists" %}artist-img{% endif %}" src="{{ results[result][entry]['img'] }}" alt="">
+        <div class="card-info">
+            <p style="font-weight: bold">{{ entry }}</p>
+            {% if result == "albums" or result == "tracks"%}
+                <p>{{ results[result][entry]['artists'] | artists }} </p>
+            {% endif %}
+        </div>
+        <form action="/lookup" method="post">
+            <input type="hidden" name="id" value="{{ results[result][entry]['id'] }}">
+            <input type="hidden" name="category" value="{{ result }}">
+            <input class="card-submit" type="submit" value="">
+        </form>
+    </div>
 {% endfor %}
-
-</table>
-
+</div>
 {% endfor %}
 
 {% endblock %}
