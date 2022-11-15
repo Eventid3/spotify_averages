@@ -19,6 +19,7 @@ from functions import (
     capitalize,
     releaseYear
 )
+from os import path
 from constants import topHitsPlaylists
 import sqlite3
 import json
@@ -42,7 +43,9 @@ def dict_factory(cursor, row):
     return {key: value for key, value in zip(col_names, row)}
 
 # connect to the sql database. check_same_thread needs to be "False" for chart.js to access the data
-db = sqlite3.connect("SpotifyTopHits.db", check_same_thread=False)
+ROOT = path.dirname(path.realpath(__file__))
+
+db = sqlite3.connect(path.join(ROOT,"SpotifyTopHits.db"), check_same_thread=False)
 c = db.cursor()
 
 
