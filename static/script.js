@@ -62,6 +62,17 @@ function newChart(avgList, parameter){
       );
 };
 
+function checkWidth(){
+  const nav = document.querySelector("nav")
+  if (window.innerWidth < 760)
+  {
+    nav.style.left = "-200px"
+  }
+  else
+  {
+    nav.style.left = "0px"
+  }
+}
 
 const win = window.addEventListener("resize", function(){
   let width = window.innerWidth;
@@ -80,10 +91,12 @@ const win = window.addEventListener("resize", function(){
 function toggleNav(){
   const nav = document.querySelector("nav");
 
-  if (nav.style.left === "-200px"){
+  if (nav.style.left === "-200px")
+  {
     nav.style.left = "0px";
   }
-  else {
+  else 
+  {
     nav.style.left = "-200px";
   }
 };

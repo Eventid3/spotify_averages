@@ -24,12 +24,15 @@
     background: #555;
   }
 
+  html{
+    font-family: 'Plus Jakarta Sans', "Helvetica Neue", "Helvetica", sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    background-color: #191919;
+  }
+
   html, body, main {
     height: 100%;
-    font-family: "Helvetica Neue", "Helvetica", sans-serif;
-    font-weight: 300;
-    font-size: 14px;
-    background-color: #191919;
 
   }
 
@@ -113,11 +116,12 @@
     right: 15px;
     border: none;
     z-index:10;
+    filter: invert(90%)
   }
 
   body {
-    line-height: 1.5;
-    /* -webkit-font-smoothing: antialiased; */
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
 
   img, picture, video, canvas, svg {
@@ -277,7 +281,6 @@
   .card-img{
     width:180px;
     height: 180px;
-    border-radius: 4px;
     margin: 10px;
     margin-bottom: 13px;
     box-shadow: 2px 2px 15px 4px rgba(20,20,20,0.3);
@@ -290,6 +293,8 @@
   .card-info{
     font-size: 14px;
     margin: 12px;
+    max-height:72px;
+    overflow: hidden;
   }
 
   .card-submit[type=button], .card-submit[type=submit]{
@@ -375,6 +380,10 @@
       left: -200px;
     }
 
+    .info span{
+      display: block;
+    }
+
     .main-container{
       left: 0px;
       width: 100%
@@ -382,6 +391,10 @@
 
     .brand a{
       font-size: 18px;
+    }
+
+    .brand a:hover{
+      background-size: 0% 100%;
     }
 
     .mobnav{
@@ -404,7 +417,8 @@
     }
 
     .card-info{
-      font-size: smaller
+      font-size: 12px;
+      max-height: 55px;
     }
 
     .lookup-text{
