@@ -4,24 +4,23 @@ from flask import Flask
 
 
 # old function - not currently used
-def getAvarage(dataType, dict, length):
+def getAvarage(data, year):
     """Get the average value of a given data from a certain year"""
-    
+    playlist = sp.playlist(topHitsPlaylists[year])["tracks"]["items"]
+    playlistLength = len(playlist)
     dataTotal = 0
 
-    for i in range(length):
-        
+    for i in range(playlistLength):
+        trackId = playlist[i]["track"]["id"]
+        trackAudioFeatures = sp.audio_features(trackId)[0]
         errorFix = 0
         try:
-            dataTotal += dict[i+1]["audio_features"][dataType]
+            dataTotal += trackAudioFeatures[data]
         except TypeError:
             errorFix -= 1
             continue
 
-    if dataType == "loudness":
-        return round((dataTotal / (length - errorFix)), 3)
-        
-    return dataTotal / (length - errorFix)
+    return dataTotal / (playlistLength - errorFix)
 
 
 def searchSpotify(query):
@@ -195,16 +194,6 @@ def getAlbum(id):
             "track": trackName,
             "audio_features": getAudioFeatures(trackId),
         }
-    
-    albumDict["averages"] = {
-        "loudness" : getAvarage("loudness", albumDict["tracks"], albumLength),
-        "danceability" : getAvarage("danceability", albumDict["tracks"], albumLength),
-        "valence" : getAvarage("valence", albumDict["tracks"], albumLength),
-        "instrumentalness" : getAvarage("instrumentalness", albumDict["tracks"], albumLength),
-        "speechiness" : getAvarage("speechiness", albumDict["tracks"], albumLength),
-        "acousticness" : getAvarage("acousticness", albumDict["tracks"], albumLength),
-        "duration" : getAvarage("duration", albumDict["tracks"], albumLength),
-        }
 
     return albumDict
 
@@ -274,16 +263,6 @@ def getPlaylist(id):
             "track": trackName,
             "artists": trackArtists,
             "audio_features": getAudioFeatures(trackId),
-        }
-    
-    playlistDict["averages"] = {
-        "loudness" : getAvarage("loudness", playlistDict["tracks"], playlistLength),
-        "danceability" : getAvarage("danceability", playlistDict["tracks"], playlistLength),
-        "valence" : getAvarage("valence", playlistDict["tracks"], playlistLength),
-        "instrumentalness" : getAvarage("instrumentalness", playlistDict["tracks"], playlistLength),
-        "speechiness" : getAvarage("speechiness", playlistDict["tracks"], playlistLength),
-        "acousticness" : getAvarage("acousticness", playlistDict["tracks"], playlistLength),
-        "duration" : getAvarage("duration", playlistDict["tracks"], playlistLength),
         }
 
     return playlistDict

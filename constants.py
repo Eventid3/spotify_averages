@@ -70,6 +70,3 @@ trackKeyDict = {
     10: "A#/Bb",
     11: "B",
 }
-
-# International New Music Friday ID
-NEW_MUSIC_FRIDAY_ID = "37i9dQZF1DX4JAvHpjipBk"

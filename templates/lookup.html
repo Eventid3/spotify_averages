@@ -1,57 +1,24 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<div class="flex-container">
-    <div class="lookup-header">
-        <div class="lookup-text">
-            <h1>{{ data['name'] }}</h1>
-            {% if data['type'] != "playlist" %}
-            <h2>
-            {% for artists in data['artists'] %}
-                {% for name, id in artists.items() %}
-                    <form action="/lookup" method="post">
-                        <input type="hidden" name="id" value="{{ id }}">
-                        <input type="hidden" name="category" value="artists">
-                        <input class="formlink" type="submit" value="{{ name }}">
-                    </form> 
-                {% endfor %}
+<div class="lookup-header">
+    <div class="lookup-text">
+        <h1>{{ data['name'] }}</h1>
+        {% if data['type'] != "playlist" %}
+        <h2>
+        {% for artists in data['artists'] %}
+            {% for name, id in artists.items() %}
+                <form action="/lookup" method="post">
+                    <input type="hidden" name="id" value="{{ id }}">
+                    <input type="hidden" name="category" value="artists">
+                    <input class="formlink" type="submit" value="{{ name }}">
+                </form> 
             {% endfor %}
-            </h2>
-            {% endif %}
-        </div>
-        <img class="lookup-img {% if data['type'] == "artist" %}artist-img{% endif %}" src="{{ data['img'] }}" alt="" width="300px">
+        {% endfor %}
+        </h2>
+        {% endif %}
     </div>
-    {% if data['type'] == "album" or data['type'] == "playlist" %}
-    <div class="averages">
-        <h3>Averages</h3>
-        <table class="averages-table">
-            <tr>
-                <td>Loudness</td>
-                <td>{{ data['averages']['loudness'] }}</td>
-            </tr>
-            <tr>
-                <td>Danceability</td>
-                <td>{{ data['averages']['danceability'] | percent }}</td>
-            </tr>
-            <tr>
-                <td>Valence</td>
-                <td>{{ data['averages']['valence'] | percent }}</td>
-            </tr>
-            <tr>
-                <td>Speechiness</td>
-                <td>{{ data['averages']['speechiness'] | percent }}</td>
-            </tr>
-            <tr>
-                <td>Acousticness</td>
-                <td>{{ data['averages']['acousticness'] | percent }}</td>
-            </tr>
-            <tr>
-                <td>Duration</td>
-                <td>{{ data['averages']['duration'] | time }}</td>
-            </tr>
-        </table>
-    </div>
-    {% endif %}
+    <img class="lookup-img {% if data['type'] == "artist" %}artist-img{% endif %}" src="{{ data['img'] }}" alt="" width="300px">
 </div>
 {% if data['type'] != "artist" %}
 <table class="data data-{{ category }}">
