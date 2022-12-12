@@ -19,8 +19,10 @@ from functions import (
     capitalize,
     releaseYear
 )
+from flask_apscheduler import APScheduler
+from sql_converter import sqlConverter
 from os import path
-from constants import topHitsPlaylists
+from constants import topHitsPlaylists, NEW_MUSIC_FRIDAY_ID
 import sqlite3
 import json
 
@@ -48,6 +50,10 @@ ROOT = path.dirname(path.realpath(__file__))
 db = sqlite3.connect(path.join(ROOT,"SpotifyTopHits.db"), check_same_thread=False)
 c = db.cursor()
 
+#init scheduler
+scheduler = APScheduler()
+scheduler.api_enabled = True
+scheduler.init_app(app)
 
 @app.route("/")
 def index():
@@ -149,3 +155,11 @@ def lookup():
 @app.route("/info")
 def info():
     return stream_template("info.html")
+
+
+@scheduler.task('cron', id='newmusicfriday_to_sql', day_of_week="fri", hour=16, minute=00)
+def weeklySql():
+    sqlConverter(NEW_MUSIC_FRIDAY_ID)
+
+scheduler.start()
+
