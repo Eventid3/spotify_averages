@@ -9,8 +9,9 @@ def sqlConverter(id):
     c = db.cursor()
 
     # get week number and year
-    week = datetime.datetime.now().isocalendar().week
-    year = datetime.datetime.now().isocalendar().year
+    date = datetime.datetime.now().isocalendar()
+    week = date.week
+    year = date.year
 
     sqlquery = "CREATE TABLE IF NOT EXISTS Year{}Week{}(id INTEGER, track TEXT, artists TEXT, loudness FLOAT, danceability FLOAT, valence FLOAT, instrumentalness FLOAT, speechiness FLOAT, acousticness FLOAT, key TEXT, duration INTEGER)".format(
         year, week
@@ -50,4 +51,9 @@ def sqlConverter(id):
 
 
     db.commit()
-    
+
+
+# code for pythonanywhere tasks
+day = datetime.datetime.today().weekday()
+if day == 4:
+    sqlConverter(NEW_MUSIC_FRIDAY_ID)
