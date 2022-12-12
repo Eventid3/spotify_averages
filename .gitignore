@@ -3,5 +3,6 @@ venv/
 __pycache__/
 
 testing.py
+old_sql_converter.py
 .cache
 tokens.txt

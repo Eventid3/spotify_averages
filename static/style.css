@@ -220,6 +220,15 @@
     width: 95px
   }
 
+  .averages{
+    margin:10px;
+    margin-bottom: 20px;
+  }
+
+  .averages-table{
+    max-width: 500px;
+  }
+
   .i{
     width: 30px
   }
@@ -253,6 +262,10 @@
     padding:20px;
     padding-bottom: 100px;
     color:whitesmoke
+  }
+
+  .flex-container{
+    display: flex;
   }
 
   .cardcontainer{
@@ -334,6 +347,7 @@
   .lookup-text{
     align-self: flex-end;
     margin-top: 20px;
+    max-width: 350px;
   }
 
   .lookup-img{
@@ -387,6 +401,10 @@
     .main-container{
       left: 0px;
       width: 100%
+    }
+
+    .flex-container{
+      flex-direction: column;
     }
 
     .brand a{
