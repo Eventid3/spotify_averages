@@ -353,7 +353,7 @@ def getArtistAlbums(id):
                     "img"
                 ] = "/static/imgages/placeholder.png"
 
-    print(albumsDict)
+    
     return albumsDict
 
 
