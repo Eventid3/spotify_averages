@@ -13,7 +13,7 @@ def sqlConverter(id):
     week = date.week
     year = date.year
 
-    sqlquery = "CREATE TABLE IF NOT EXISTS Year{}Week{}(id INTEGER, track TEXT, artists TEXT, loudness FLOAT, danceability FLOAT, valence FLOAT, instrumentalness FLOAT, speechiness FLOAT, acousticness FLOAT, key TEXT, duration INTEGER)".format(
+    sqlquery = "CREATE TABLE IF NOT EXISTS year{}week{}(id INTEGER, track TEXT, artists TEXT, loudness FLOAT, danceability FLOAT, valence FLOAT, instrumentalness FLOAT, speechiness FLOAT, acousticness FLOAT, key TEXT, duration INTEGER)".format(
         year, week
     )
     c.execute(sqlquery)
@@ -23,7 +23,7 @@ def sqlConverter(id):
     
 
     # insert the data
-    insertquery = "INSERT INTO Year{}Week{}(id, track, artists, loudness, danceability, valence, instrumentalness, speechiness, acousticness, key, duration) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)".format(
+    insertquery = "INSERT INTO year{}week{}(id, track, artists, loudness, danceability, valence, instrumentalness, speechiness, acousticness, key, duration) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)".format(
         year, week
     )
     for song in data["tracks"]:
